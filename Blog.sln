@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog", "Blog\Blog.csproj", "{24F70B18-3C4C-4361-9AE8-523AF27070C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.UI", "Blog\Blog.UI.csproj", "{24F70B18-3C4C-4361-9AE8-523AF27070C7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Data", "Blog.Data\Blog.Data.csproj", "{328024F1-866E-4832-B34A-B6737DC5C531}"
 EndProject
