@@ -1,0 +1,2 @@
+# blog
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/de13855f9cc848709cd8f2257cd66ce1)](https://app.codacy.com/app/huseyinozgur/blog?utm_source=github.com&utm_medium=referral&utm_content=huseyinozgur/blog&utm_campaign=Badge_Grade_Settings)
