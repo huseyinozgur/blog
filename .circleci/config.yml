@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    steps:
+      - checkout
+      - run: dotnet build
+workflows:
+  version: 2
+  build_project:
+    jobs:
+      - build
