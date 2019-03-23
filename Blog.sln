@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.UI", "Blog\Blog.UI.csproj", "{24F70B18-3C4C-4361-9AE8-523AF27070C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog", "Blog\Blog.csproj", "{24F70B18-3C4C-4361-9AE8-523AF27070C7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Data", "Blog.Data\Blog.Data.csproj", "{328024F1-866E-4832-B34A-B6737DC5C531}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Data.Model", "Blog.Data.Model\Blog.Data.Model.csproj", "{CF5D85C6-991E-4A42-A774-D239728DE44B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.BackOffice", "Blog.BackOffice\Blog.BackOffice.csproj", "{C1DBC1E0-E39D-47EF-ACA5-E04C9F6A8DCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.BackOffice", "Blog.BackOffice\Blog.BackOffice.csproj", "{C1DBC1E0-E39D-47EF-ACA5-E04C9F6A8DCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
