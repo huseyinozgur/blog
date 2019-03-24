@@ -1,0 +1,23 @@
+{
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/jincod/dotnetcore-buildpack"
+    }
+  ],
+  "env": {
+    "PROJECT_FILE": "Blog",
+    "PROJECT_Name": "Blog"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "blog",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
