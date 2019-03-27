@@ -19,6 +19,138 @@ namespace Blog.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            modelBuilder.Entity("Blog.Data.Model.Entity.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<string>("CreatorUserId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastEntryCreatorUserId");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<string>("LastModifier");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorUserId");
+
+                    b.HasIndex("LastEntryCreatorUserId");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Blog.Data.Model.Entity.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body");
+
+                    b.Property<DateTime>("DateTime");
+
+                    b.Property<string>("Email");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Blog.Data.Model.Entity.Post", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CategoryId");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<string>("CreatorUserId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastEntryCreatorUserId");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<string>("LastModifier");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("CreatorUserId");
+
+                    b.HasIndex("LastEntryCreatorUserId");
+
+                    b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("Blog.Data.Model.Entity.PostDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<string>("CreatorUserId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastEntryCreatorUserId");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<string>("LastModifier");
+
+                    b.Property<int>("PostId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorUserId");
+
+                    b.HasIndex("LastEntryCreatorUserId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostDetails");
+                });
+
+            modelBuilder.Entity("Blog.Data.Model.Entity.Tags", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("PostDetailId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostDetailId");
+
+                    b.ToTable("Tags");
+                });
+
             modelBuilder.Entity("Blog.Data.Model.Identity.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
@@ -174,6 +306,56 @@ namespace Blog.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Blog.Data.Model.Entity.Category", b =>
+                {
+                    b.HasOne("Blog.Data.Model.Identity.ApplicationUser", "CreatorUser")
+                        .WithMany()
+                        .HasForeignKey("CreatorUserId");
+
+                    b.HasOne("Blog.Data.Model.Identity.ApplicationUser", "LastEntryCreatorUser")
+                        .WithMany()
+                        .HasForeignKey("LastEntryCreatorUserId");
+                });
+
+            modelBuilder.Entity("Blog.Data.Model.Entity.Post", b =>
+                {
+                    b.HasOne("Blog.Data.Model.Entity.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Blog.Data.Model.Identity.ApplicationUser", "CreatorUser")
+                        .WithMany()
+                        .HasForeignKey("CreatorUserId");
+
+                    b.HasOne("Blog.Data.Model.Identity.ApplicationUser", "LastEntryCreatorUser")
+                        .WithMany()
+                        .HasForeignKey("LastEntryCreatorUserId");
+                });
+
+            modelBuilder.Entity("Blog.Data.Model.Entity.PostDetail", b =>
+                {
+                    b.HasOne("Blog.Data.Model.Identity.ApplicationUser", "CreatorUser")
+                        .WithMany()
+                        .HasForeignKey("CreatorUserId");
+
+                    b.HasOne("Blog.Data.Model.Identity.ApplicationUser", "LastEntryCreatorUser")
+                        .WithMany()
+                        .HasForeignKey("LastEntryCreatorUserId");
+
+                    b.HasOne("Blog.Data.Model.Entity.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Blog.Data.Model.Entity.Tags", b =>
+                {
+                    b.HasOne("Blog.Data.Model.Entity.PostDetail")
+                        .WithMany("Tags")
+                        .HasForeignKey("PostDetailId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

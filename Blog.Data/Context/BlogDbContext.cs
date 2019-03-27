@@ -1,15 +1,13 @@
-﻿using Blog.Data.Model.Identity;
+﻿using Blog.Data.Model.Entity;
+using Blog.Data.Model.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Blog.Data.Context
 {
-    public class BlogDbContext :IdentityDbContext<ApplicationUser,ApplicationRole,string>
+    public class BlogDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
-  
+
         public BlogDbContext(DbContextOptions options) : base(options)
         {
         }
@@ -19,6 +17,11 @@ namespace Blog.Data.Context
         }
 
         #region Dbset
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<PostDetail> PostDetails { get; set; }
+        public DbSet<Tags> Tags { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         #endregion
 
@@ -31,9 +34,7 @@ namespace Blog.Data.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ForNpgsqlUseIdentityColumns();
-
             //modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
-
         }
     }
 }

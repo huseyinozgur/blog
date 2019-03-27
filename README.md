@@ -3,4 +3,4 @@
 [![CircleCI](https://circleci.com/gh/huseyinozgur/blog/tree/master.svg?style=svg)](https://circleci.com/gh/huseyinozgur/blog/tree/master)
 
 # Heroku
-https://huseyinozgur.herokuapp.com/
+https://blog-webui.herokuapp.com/
