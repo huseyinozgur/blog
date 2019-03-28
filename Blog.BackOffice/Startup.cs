@@ -40,11 +40,10 @@ namespace Blog.BackOffice
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(o =>
             {
-                o.SignIn.RequireConfirmedEmail = false;
-                o.SignIn.RequireConfirmedPhoneNumber = false;
+                
                 o.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(1);
                 o.Lockout.MaxFailedAccessAttempts = 5;
-                o.User.RequireUniqueEmail = true;
+
             }).AddEntityFrameworkStores<BlogDbContext>()
                 .AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(o =>
@@ -53,9 +52,22 @@ namespace Blog.BackOffice
                 o.AccessDeniedPath = "/auth/login";
                 o.LogoutPath = "/Home/Index";
             });
-            services.AddDbContext<BlogDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            string connectionString = Configuration.GetConnectionString("DATABASE_URL");
+            bool isUrl = Uri.TryCreate(connectionString, UriKind.Absolute, out Uri url);
+            string host = url.Host;
+            string port = url.Port.ToString();
+            string dbName = url.LocalPath.Substring(1);
+            string userId = url.UserInfo.Split(':')[0];
+            string password = url.UserInfo.Split(':')[1];
+            string cs = $"User ID={userId};Password={password};Server={host};Port={port};Database={dbName};Pooling=true;Trust Server Certificate=true;SslMode=Prefer";
+            
+
+            services.AddDbContext<BlogDbContext>(options => options.UseNpgsql(cs));
             services.AddMediatR(typeof(BlogsQuery).Assembly);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

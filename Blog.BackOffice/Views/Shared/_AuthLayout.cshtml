@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Blog.BackOffice</title>
+    <title>@ViewData["Title"] - BackOffice</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -16,13 +16,13 @@
               integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
-  
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Back Office - Login</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="~/favicon.ico"/>
-    <link rel="icon" href="~/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="~/favicon.ico" />
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon" />
 
     <!-- Toggles CSS -->
     <link href="~/lib/jquery-toggles/css/toggles.css" rel="stylesheet" type="text/css">
@@ -37,10 +37,15 @@
         <div class="loader-pendulums"></div>
     </div>
     <!-- /Preloader -->
-   
+    <!-- HK Wrapper -->
+    <div class="hk-wrapper">
+
+        <!-- Main Content -->
+        <div class="hk-pg-wrapper hk-auth-wrapper">
             @RenderBody()
 
-
+        </div>
+    </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

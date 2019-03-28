@@ -21,4 +21,9 @@
     <ProjectReference Include="..\Blog.Data\Blog.Data.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Models\AuthView\" />
+  </ItemGroup>
+
 </Project>
