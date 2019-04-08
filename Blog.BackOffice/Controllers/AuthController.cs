@@ -1,4 +1,5 @@
-﻿using Blog.Data.Model.Identity;
+﻿using Blog.BackOffice.Models.AuthView;
+using Blog.Data.Model.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -25,13 +26,22 @@ namespace Blog.BackOffice.Controllers
         }
 
 
-        public IActionResult Login() => View();
+        public IActionResult Login() => View(new LoginViewModel());
         
 
         [HttpPost]
-        public async Task<IActionResult> Login(string Email, string Password)
+        public async Task<IActionResult> Login([FromForm]LoginViewModel loginViewModel)
         {
-            ApplicationUser user = await UserManager.FindByEmailAsync(Email);
+            if (!ModelState.IsValid)
+            {
+                //foreach (var item in ModelState.Values.Where(q => q.ValidationState != Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid))
+                //{
+                //    ModelState.AddModelError(string.Empty, item.Errors.FirstOrDefault().ToString());
+                //}
+
+                return View(loginViewModel);
+            }
+            ApplicationUser user = await UserManager.FindByEmailAsync(loginViewModel.Email);
 
             if (user == null )
             {
@@ -39,7 +49,7 @@ namespace Blog.BackOffice.Controllers
                 return View();
             }
 
-            var result = await SignInManager.PasswordSignInAsync(user.UserName, Password,false,false);
+            var result = await SignInManager.PasswordSignInAsync(user.UserName, loginViewModel.Password, false,false);
 
             if (result.Succeeded)
                 return RedirectToAction("Index", "Home");

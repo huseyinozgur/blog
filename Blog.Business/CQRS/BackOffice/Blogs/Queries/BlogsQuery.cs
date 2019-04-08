@@ -1,8 +1,9 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Blog.Data.Context;
 using MediatR;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Business.CQRS.BackOffice.Blogs.Queries
 {
@@ -22,7 +23,7 @@ namespace Blog.Business.CQRS.BackOffice.Blogs.Queries
         }
         public async Task<string> Handle(BlogsQuery request, CancellationToken cancellationToken)
         {
-            var model = await blogDbContext.Categories.ToAsyncEnumerable().ToList();
+            var model = await blogDbContext.Categories.ToListAsync();
             return model.FirstOrDefault().Name;
         }
     }
